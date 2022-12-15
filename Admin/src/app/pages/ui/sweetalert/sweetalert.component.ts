@@ -109,10 +109,12 @@ export class SweetalertComponent implements OnInit {
     Swal.fire({
       title: 'Auto close alert!',
       html: 'I will close in <strong></strong> seconds.',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
       timer: 2000,
 
       didOpen: () => {
-        Swal.showLoading();
+        Swal.showLoading(Swal.getDenyButton());
         timerInterval = setInterval(() => {
           const content = Swal.getHtmlContainer()
           if (content) {
@@ -122,6 +124,7 @@ export class SweetalertComponent implements OnInit {
             }
           }
         }, 100);
+        
       },
       willClose: () => {
         clearInterval(timerInterval);
@@ -133,6 +136,7 @@ export class SweetalertComponent implements OnInit {
         console.log('I was closed by the timer');
       }
     });
+    
   }
   custom() {
     Swal.fire({
